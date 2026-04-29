@@ -4,12 +4,9 @@ env/
 .env
 
 # Google Cloud & Sheets Service Accounts
-service_account.json
 
 # Cookies and Browser sessions
 facebook_cookies.json
-chrome_profile/
-chrome_profile_ig/
 chrome_profile_th/
 chrome_profile_x/
 chromedriver_fb
