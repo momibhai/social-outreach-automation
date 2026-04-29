@@ -3,18 +3,6 @@ venv/
 env/
 .env
 
-# Google Cloud & Sheets Service Accounts
-
-# Cookies and Browser sessions
-facebook_cookies.json
-chrome_profile_th/
-chrome_profile_x/
-chromedriver_fb
-chromedriver_ig
-chromedriver_th
-chromedriver_x
-chromedriver
-
 # Test Files
 test_gsheet.py
 
