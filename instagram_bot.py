@@ -338,13 +338,11 @@ def check_if_replied(driver, name):
     return False
 
 def setup_driver(profile_dir):
-    import subprocess, platform
-    # Only kill chromedriver, NOT all chrome.exe (would kill user's browser)
+    import subprocess, platform, shutil
     print("[*] Cleaning up stale ChromeDriver processes...")
     try:
         if platform.system() == "Windows":
-            subprocess.run(["taskkill","/F","/IM","chromedriver.exe","/T"],
-                          capture_output=True, timeout=5)
+            subprocess.run(["taskkill","/F","/IM","chromedriver.exe","/T"], capture_output=True, timeout=5)
         else:
             subprocess.run(["pkill","-9","-f","chromedriver"], capture_output=True)
             subprocess.run(["pkill","-9","-f","chrome"], capture_output=True)
@@ -352,26 +350,36 @@ def setup_driver(profile_dir):
     except Exception as e:
         print(f"[!] ChromeDriver kill warning: {e}")
 
-    # Remove all stale lock files
-    for lock in ["SingletonLock", "SingletonCookie", "SingletonSocket"]:
+    # Remove all stale lock files and Local State (to fix uc=True crash)
+    for lock in ["SingletonLock", "SingletonCookie", "SingletonSocket", "Local State"]:
         p = os.path.join(profile_dir, lock)
         if os.path.exists(p):
             try: os.remove(p); print(f"[*] Removed lock: {lock}")
             except Exception: pass
 
     headless = os.environ.get("HEADLESS", "false").lower() == "true"
-    print(f"[*] Launching Chrome via SeleniumBase (headless={headless})...")
+    print(f"[*] Launching Chrome (headless={headless})...")
     
-    from seleniumbase import Driver
-    driver = Driver(
-        uc=True, 
-        user_data_dir=profile_dir, 
-        headless=headless, 
-        no_sandbox=True, 
-        disable_gpu=True,
-        chromium_arg="--disable-dev-shm-usage,--password-store=basic"
-    )
-    
+    options = Options()
+    options.add_argument(f"--user-data-dir={profile_dir}")
+    options.add_argument("--window-size=1280,1024")
+    options.add_argument("--disable-popup-blocking")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--no-first-run")
+    options.add_argument("--no-default-browser-check")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--password-store=basic")
+    options.add_argument("--remote-debugging-port=0")
+    if headless:
+        options.add_argument("--headless=new")
+        options.add_argument("--disable-extensions")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option("useAutomationExtension", False)
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     return driver
 
