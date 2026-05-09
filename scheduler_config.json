@@ -1,0 +1,25 @@
+{
+  "max_fb": 5,
+  "max_ig": 5,
+  "run_fb": true,
+  "run_ig": true,
+  "row_start_fb": 20,
+  "row_end_fb": 0,
+  "row_start_ig": 20,
+  "row_end_ig": 0,
+  "schedule_enabled": false,
+  "schedule_hour": "04",
+  "schedule_minute": "00",
+  "schedule_ampm": "AM",
+  "schedule_days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ],
+  "last_run_date_fb": "2026-05-03",
+  "last_run_date_ig": "2026-05-03"
+}

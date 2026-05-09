@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  social-outreach-app:
+    build: .
+    container_name: social-outreach-bot
+    restart: unless-stopped
+    ports:
+      # Exposing the dashboard on a different port (e.g. 8502) since 8501 is taken by amazesst-bot
+      - "8502:8501"
+    environment:
+      - HEADLESS=true
+      - TZ=Asia/Karachi
+    volumes:
+      # Mount the DB so logs/status persist if container restarts
+      - ./app.db:/app/app.db
+      # Mount the Chrome profiles so logins persist
+      - ./chrome_profile:/app/chrome_profile
+      - ./chrome_profile_ig:/app/chrome_profile_ig
+    # Use shm_size to prevent Chrome from crashing on Linux (dev-shm-usage)
+    shm_size: '2gb'
