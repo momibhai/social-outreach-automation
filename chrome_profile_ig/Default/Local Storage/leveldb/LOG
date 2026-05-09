@@ -1,8 +1,2 @@
-2026/05/09-04:43:35.420 5190 Reusing MANIFEST C:\Users\Ali BALOCH\Desktop\Next Js\Social_media_outreach\chrome_profile_ig\Default\Local Storage\leveldb/MANIFEST-000001
-2026/05/09-04:43:35.425 5190 Recovering log #27
-2026/05/09-04:43:35.425 5190 Level-0 table #31: started
-2026/05/09-04:43:35.438 5190 Level-0 table #31: 20529 bytes OK
-2026/05/09-04:43:35.449 5190 Delete type=0 #27
-2026/05/09-05:04:28.421 4d3c Level-0 table #34: started
-2026/05/09-05:04:28.432 4d3c Level-0 table #34: 16163 bytes OK
-2026/05/09-05:04:28.436 4d3c Delete type=0 #32
+2026/05/10-02:13:40.673 53 Creating DB /app/chrome_profile_ig/Default/Local Storage/leveldb since it was missing.
+2026/05/10-02:13:40.706 53 Reusing MANIFEST /app/chrome_profile_ig/Default/Local Storage/leveldb/MANIFEST-000001

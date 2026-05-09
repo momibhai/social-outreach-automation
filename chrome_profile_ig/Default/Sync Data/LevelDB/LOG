@@ -1,3 +1,2 @@
-2026/05/09-04:43:35.361 44c0 Reusing MANIFEST C:\Users\Ali BALOCH\Desktop\Next Js\Social_media_outreach\chrome_profile_ig\Default\Sync Data\LevelDB/MANIFEST-000001
-2026/05/09-04:43:35.361 44c0 Recovering log #3
-2026/05/09-04:43:35.362 44c0 Reusing old log C:\Users\Ali BALOCH\Desktop\Next Js\Social_media_outreach\chrome_profile_ig\Default\Sync Data\LevelDB/000003.log 
+2026/05/10-02:13:40.637 34 Creating DB /app/chrome_profile_ig/Default/Sync Data/LevelDB since it was missing.
+2026/05/10-02:13:40.644 34 Reusing MANIFEST /app/chrome_profile_ig/Default/Sync Data/LevelDB/MANIFEST-000001

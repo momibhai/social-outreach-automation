@@ -1,3 +1,2 @@
-2026/05/09-04:43:35.500 4640 Reusing MANIFEST C:\Users\Ali BALOCH\Desktop\Next Js\Social_media_outreach\chrome_profile_ig\Default\shared_proto_db/MANIFEST-000001
-2026/05/09-04:43:35.501 4640 Recovering log #3
-2026/05/09-04:43:35.502 4640 Reusing old log C:\Users\Ali BALOCH\Desktop\Next Js\Social_media_outreach\chrome_profile_ig\Default\shared_proto_db/000003.log 
+2026/05/10-02:13:40.769 35 Creating DB /app/chrome_profile_ig/Default/shared_proto_db since it was missing.
+2026/05/10-02:13:40.779 35 Reusing MANIFEST /app/chrome_profile_ig/Default/shared_proto_db/MANIFEST-000001
