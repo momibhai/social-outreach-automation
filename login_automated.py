@@ -14,7 +14,7 @@ def fb_login(email, password):
     clear_old_profile(profile_dir)
     
     print("\n[*] Starting Facebook Login (Headless)...")
-    with SB(uc=True, user_data_dir=profile_dir, headless=True, no_sandbox=True, disable_gpu=True) as sb:
+    with SB(uc=True, user_data_dir=profile_dir, headless=True) as sb:
         sb.open("https://www.facebook.com/")
         sb.sleep(3)
         
@@ -47,7 +47,7 @@ def ig_login(username, password):
     clear_old_profile(profile_dir)
     
     print("\n[*] Starting Instagram Login (Headless)...")
-    with SB(uc=True, user_data_dir=profile_dir, headless=True, no_sandbox=True, disable_gpu=True) as sb:
+    with SB(uc=True, user_data_dir=profile_dir, headless=True) as sb:
         sb.open("https://www.instagram.com/accounts/login/")
         sb.sleep(4)
         
