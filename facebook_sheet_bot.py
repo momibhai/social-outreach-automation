@@ -381,8 +381,8 @@ def setup_driver(profile_dir):
     except Exception as e:
         print(f"[!] ChromeDriver kill warning: {e}")
 
-    # Remove stale profile lock files AND Local State (to fix uc=True crash)
-    for lock in ["SingletonLock", "SingletonCookie", "SingletonSocket", "Local State"]:
+    # Remove stale profile lock files
+    for lock in ["SingletonLock", "SingletonCookie", "SingletonSocket"]:
         p = os.path.join(profile_dir, lock)
         if os.path.exists(p):
             try: os.remove(p); print(f"[*] Removed lock: {lock}")
