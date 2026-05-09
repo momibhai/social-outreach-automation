@@ -379,6 +379,7 @@ def setup_driver(profile_dir):
                           capture_output=True, timeout=5)
         else:
             subprocess.run(["pkill","-9","-f","chromedriver"], capture_output=True)
+            subprocess.run(["pkill","-9","-f","chrome"], capture_output=True)
         time.sleep(2)
     except Exception as e:
         print(f"[!] ChromeDriver kill warning: {e}")
@@ -402,6 +403,7 @@ def setup_driver(profile_dir):
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
+    options.add_argument("--password-store=basic")
     options.add_argument("--remote-debugging-port=0")
     if headless:
         options.add_argument("--headless=new")

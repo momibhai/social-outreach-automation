@@ -15,50 +15,32 @@ def fb_login(email, password):
     
     print("\n[*] Starting Facebook Login (Headless)...")
     with SB(uc=True, user_data_dir=profile_dir, headless=True) as sb:
-        try:
-            sb.open("https://www.facebook.com/")
-            sb.sleep(4)
+        sb.open("https://www.facebook.com/")
+        sb.sleep(3)
+        
+        print("[*] Entering credentials...")
+        sb.type('input[name="email"]', email)
+        sb.type('input[name="pass"]', password)
+        sb.click('button[name="login"]')
+        
+        print("[*] Waiting for response...")
+        sb.sleep(6)
+        
+        # Check for 2FA
+        if sb.is_element_visible('input[name="approvals_code"]'):
+            print("\n[!] Facebook is asking for 2-Factor Authentication (OTP)!")
+            otp = input("[>] Please enter the 6-digit OTP code sent to your phone/app: ")
+            sb.type('input[name="approvals_code"]', otp)
+            sb.click('button[value="Continue"]')
+            sb.sleep(5)
             
-            # Dismiss Cookie popup if it blocks the page
-            if sb.is_element_visible('button[title*="Allow"]'):
-                sb.click('button[title*="Allow"]')
-                sb.sleep(2)
-            elif sb.is_element_visible('button:contains("Allow all cookies")'):
-                sb.click('button:contains("Allow all cookies")')
-                sb.sleep(2)
-            
-            print("[*] Entering credentials and pressing ENTER...")
-            sb.type('input[name="email"]', email)
-            # Type password and press Enter immediately (most reliable way to submit)
-            sb.type('input[name="pass"]', password + '\n')
-            
-            print("[*] Waiting for response...")
-            sb.sleep(15)
-            
-            # Check for 2FA
-            if sb.is_element_visible('input[name="approvals_code"]'):
-                print("\n[!] Facebook is asking for 2-Factor Authentication (OTP)!")
-                otp = input("[>] Please enter the 6-digit OTP code sent to your phone/app: ")
-                sb.type('input[name="approvals_code"]', otp)
-                sb.click('button[value="Continue"], button[type="submit"]')
-                sb.sleep(5)
-                
-                # Click "Save Browser" if prompted
-                if sb.is_element_visible('input[value="Save Browser"]'):
-                    sb.click('input[value="Save Browser"]')
-                    sb.click('button[value="Continue"]')
-                    sb.sleep(3)
-            
-            print("\n[+] SUCCESS: Facebook profile saved permanently!")
-            sb.save_screenshot("fb_success.png")
-            print(">>> Saved 'fb_success.png'. Aap usay khol kar dekh sakte hain. <<<")
-            
-        except Exception as e:
-            print(f"\n[-] ERROR: {e}")
-            try:
-                sb.save_screenshot("fb_error.png")
-                print(">>> Saved 'fb_error.png' in your folder! Open it to see exactly why it failed! <<<")
-            except: pass
+            # Click "Save Browser" if prompted
+            if sb.is_element_visible('input[value="Save Browser"]'):
+                sb.click('input[value="Save Browser"]')
+                sb.click('button[value="Continue"]')
+                sb.sleep(3)
+        
+        print("\n[+] SUCCESS: Facebook profile saved permanently! Aap ab bot run kar sakte hain.")
 
 def ig_login(username, password):
     profile_dir = "chrome_profile_ig"
@@ -66,38 +48,26 @@ def ig_login(username, password):
     
     print("\n[*] Starting Instagram Login (Headless)...")
     with SB(uc=True, user_data_dir=profile_dir, headless=True) as sb:
-        try:
-            sb.open("https://www.instagram.com/accounts/login/")
+        sb.open("https://www.instagram.com/accounts/login/")
+        sb.sleep(4)
+        
+        print("[*] Entering credentials...")
+        sb.type('input[name="username"]', username)
+        sb.type('input[name="password"]', password)
+        sb.click('button[type="submit"]')
+        
+        print("[*] Waiting for response...")
+        sb.sleep(7)
+        
+        # Check for 2FA
+        if sb.is_element_visible('input[name="verificationCode"]'):
+            print("\n[!] Instagram is asking for 2-Factor Authentication (OTP)!")
+            otp = input("[>] Please enter the OTP code sent to your phone/app: ")
+            sb.type('input[name="verificationCode"]', otp)
+            sb.click('button[type="button"]')
             sb.sleep(5)
             
-            if sb.is_element_visible('button:contains("Allow all cookies")'):
-                sb.click('button:contains("Allow all cookies")')
-                sb.sleep(2)
-            
-            print("[*] Entering credentials and pressing ENTER...")
-            sb.type('input[name="username"]', username)
-            sb.type('input[name="password"]', password + '\n')
-            
-            print("[*] Waiting for response...")
-            sb.sleep(15)
-            
-            # Check for 2FA
-            if sb.is_element_visible('input[name="verificationCode"]'):
-                print("\n[!] Instagram is asking for 2-Factor Authentication (OTP)!")
-                otp = input("[>] Please enter the OTP code sent to your phone/app: ")
-                sb.type('input[name="verificationCode"]', otp)
-                sb.click('button[type="button"]')
-                sb.sleep(5)
-                
-            print("\n[+] SUCCESS: Instagram profile saved permanently!")
-            sb.save_screenshot("ig_success.png")
-            
-        except Exception as e:
-            print(f"\n[-] ERROR: {e}")
-            try:
-                sb.save_screenshot("ig_error.png")
-                print(">>> Saved 'ig_error.png' in your folder! Open it to see exactly why it failed! <<<")
-            except: pass
+        print("\n[+] SUCCESS: Instagram profile saved permanently! Aap ab bot run kar sakte hain.")
 
 if __name__ == "__main__":
     print("=====================================")
