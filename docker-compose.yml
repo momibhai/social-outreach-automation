@@ -15,5 +15,6 @@ services:
       # Mount the Chrome profiles so logins persist
       - ./chrome_profile:/app/chrome_profile
       - ./chrome_profile_ig:/app/chrome_profile_ig
+      - ./service_account.json:/app/service_account.json
     # Use shm_size to prevent Chrome from crashing on Linux (dev-shm-usage)
     shm_size: '2gb'
