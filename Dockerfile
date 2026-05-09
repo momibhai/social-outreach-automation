@@ -7,9 +7,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     xvfb \
     curl \
-    && mkdir -p /etc/apt/keyrings \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg \
-    && echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
     && apt-get update \
     && apt-get install -y google-chrome-stable \
     && apt-get clean \
@@ -18,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy requirements and install
-RUN pip install --no-cache-dir streamlit seleniumbase gspread google-auth openai python-dotenv pytz pandas
+RUN pip install --no-cache-dir streamlit selenium seleniumbase webdriver-manager gspread google-auth openai python-dotenv pytz pandas
 
 # Copy application files
 COPY . .
