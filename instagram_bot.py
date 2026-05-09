@@ -361,7 +361,7 @@ def setup_driver(profile_dir):
     print(f"[*] Launching Chrome (headless={headless})...")
     
     options = Options()
-    options.add_argument(f"--user-data-dir={profile_dir}")
+    options.add_argument(f"--user-data-dir={os.path.abspath(profile_dir)}")
     options.add_argument("--window-size=1280,1024")
     options.add_argument("--disable-popup-blocking")
     options.add_argument("--no-sandbox")
