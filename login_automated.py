@@ -27,20 +27,13 @@ def fb_login(email, password):
                 sb.click('button:contains("Allow all cookies")')
                 sb.sleep(2)
             
-            print("[*] Entering credentials...")
+            print("[*] Entering credentials and pressing ENTER...")
             sb.type('input[name="email"]', email)
-            sb.type('input[name="pass"]', password)
-            
-            # Try multiple login button formats
-            if sb.is_element_visible('button[name="login"]'):
-                sb.click('button[name="login"]')
-            elif sb.is_element_visible('#loginbutton'):
-                sb.click('#loginbutton')
-            else:
-                sb.click('button[type="submit"]')
+            # Type password and press Enter immediately (most reliable way to submit)
+            sb.type('input[name="pass"]', password + '\n')
             
             print("[*] Waiting for response...")
-            sb.sleep(8)
+            sb.sleep(15)
             
             # Check for 2FA
             if sb.is_element_visible('input[name="approvals_code"]'):
@@ -81,13 +74,12 @@ def ig_login(username, password):
                 sb.click('button:contains("Allow all cookies")')
                 sb.sleep(2)
             
-            print("[*] Entering credentials...")
+            print("[*] Entering credentials and pressing ENTER...")
             sb.type('input[name="username"]', username)
-            sb.type('input[name="password"]', password)
-            sb.click('button[type="submit"]')
+            sb.type('input[name="password"]', password + '\n')
             
             print("[*] Waiting for response...")
-            sb.sleep(8)
+            sb.sleep(15)
             
             # Check for 2FA
             if sb.is_element_visible('input[name="verificationCode"]'):
