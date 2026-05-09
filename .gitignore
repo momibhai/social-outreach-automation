@@ -12,5 +12,4 @@ test_gsheet.py
 # Python cache files
 __pycache__/
 *.py[cod]
-*$py.classservice_account.json
-*.json
+*$py.class
