@@ -368,8 +368,7 @@ def setup_driver(profile_dir):
         user_data_dir=profile_dir, 
         headless=headless, 
         no_sandbox=True, 
-        disable_gpu=True,
-        disable_dev_shm_usage=True
+        disable_gpu=True
     )
     
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
