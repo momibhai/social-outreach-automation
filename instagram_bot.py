@@ -359,30 +359,19 @@ def setup_driver(profile_dir):
             try: os.remove(p); print(f"[*] Removed lock: {lock}")
             except Exception: pass
 
-    print("[*] Launching Chrome via Selenium + webdriver-manager...")
-
-    options = Options()
-    options.add_argument(f"--user-data-dir={profile_dir}")
-    options.add_argument("--window-size=1280,1024")
-    options.add_argument("--disable-popup-blocking")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--no-first-run")
-    options.add_argument("--no-default-browser-check")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--password-store=basic")
-    options.add_argument("--remote-debugging-port=0")
     headless = os.environ.get("HEADLESS", "false").lower() == "true"
-    if headless:
-        options.add_argument("--headless=new")
-        options.add_argument("--disable-extensions")
-        print("[*] Running in HEADLESS mode.")
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option("useAutomationExtension", False)
-
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
+    print(f"[*] Launching Chrome via SeleniumBase (headless={headless})...")
+    
+    from seleniumbase import Driver
+    driver = Driver(
+        uc=True, 
+        user_data_dir=profile_dir, 
+        headless=headless, 
+        no_sandbox=True, 
+        disable_gpu=True,
+        disable_dev_shm_usage=True
+    )
+    
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     return driver
 
