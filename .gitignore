@@ -13,3 +13,11 @@ test_gsheet.py
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Sensitive files and profiles
+service_account.json
+fb_cookies.json
+ig_cookies.json
+chrome_profile/
+chrome_profile_ig/
+app.db
