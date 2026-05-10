@@ -283,7 +283,7 @@ elif page == "▶️ Run Bots":
             # Use xvfb-run on Linux (Docker/VPS) to provide a virtual display
             if sys.platform != "win32":
                 cmd = [
-                    "xvfb-run", "--server-args=-screen 0 1280x1024x24", 
+                    "xvfb-run", "-a", "--server-args=-screen 0 1280x1024x24", 
                     python_exe, "-u", script,
                     "--max", str(max_msgs),
                     "--row-start", str(row_start),
@@ -552,7 +552,7 @@ def background_scheduler():
                             "--triggered-by", "scheduler"
                         ]
                         if sys.platform != "win32":
-                            cmd_fb = ["xvfb-run", "--server-args=-screen 0 1280x1024x24"] + cmd_fb
+                            cmd_fb = ["xvfb-run", "-a", "--server-args=-screen 0 1280x1024x24"] + cmd_fb
                             
                         subprocess.Popen(cmd_fb, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=my_env)
 
@@ -568,7 +568,7 @@ def background_scheduler():
                             "--triggered-by", "scheduler"
                         ]
                         if sys.platform != "win32":
-                            cmd_ig = ["xvfb-run", "--server-args=-screen 0 1280x1024x24"] + cmd_ig
+                            cmd_ig = ["xvfb-run", "-a", "--server-args=-screen 0 1280x1024x24"] + cmd_ig
                             
                         subprocess.Popen(cmd_ig, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=my_env)
 
